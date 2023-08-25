@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title> Shoppers Don't Stop </title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+		
+	</head>
+
+	<body>
+		 
+		<ul class="nav">
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('main.product_page') }}" disabled>{{ name }}</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('main.view_cart') }}">Cart</a>
+			</li>
+			
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+			</li>
+		</ul>
+		<h2>Order Product</h2>
+
+		<h4 style="margin-left: 10px;">Product: {{ product_data.product_name }}</h4>
+		<h4 style="margin-left: 10px;">Available Quantity: {{ product_data.product_quantity }}</h4>
+		<h4 style="margin-left: 10px;">Price/{{ product_data.unit_of_measurement }}: {{ product_data.sell_price }}</h4>
+		<br>
+		<form action="/order_product/{{ product_data.product_id }}" method="POST">
+	  	<div class="form-group row">
+	  	<label class="col-sm-2 col-form-label" for="product_quantity">Enter Quantity:</label><br>
+	  	<input type="number" id="product_quantity" min="1" max="{{ product_data.product_quantity }}" name="product_quantity"><br>
+	  	</div>
+	  	
+	  	<input type="submit" value="Buy">
+	</form>
+	</body>
+</html>

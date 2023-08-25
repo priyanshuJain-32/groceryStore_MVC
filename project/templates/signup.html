@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> Shoppers Don't Stop </title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<base href="http://127.0.0.1:5000" />
+</head>
+<body>
+	<ul class="nav">
+  		<li class="nav-item">
+    		<a class="nav-link active" aria-current="page" href="{{ url_for('main.home') }}">Home</a>
+  		</li>
+		<li class="nav-item">
+		    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+		</li>
+		<li class="nav-item">
+		    <a class="nav-link" href="{{ url_for('auth.admin_login') }}">Admin Login</a>
+		</li>
+	</ul>
+	<h3> User Signup </h3>
+	<form action="/signup" method="POST">
+	  	<label for="first_name">Enter First Name:</label><br>
+	  	<input type="text" id="first_name" name="first_name"><br>
+
+	  	<label for="user_name">User name:</label><br>
+	  	<input type="text" id="user_name" name="user_name"><br>
+	  	
+	  	<label for="password">Set Password:</label><br>
+	  	<input type="password" id="password" name="password"><br>
+
+	  	<label for="repeat_password">Repeat Password:</label><br>
+	  	<input type="password" id="repeat_password" name="repeat_password"><br>
+	  	<br>
+	  	
+	  	<input type="submit" value="Submit">
+	</form>
+</body>
+</html>

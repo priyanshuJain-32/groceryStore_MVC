@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title> Shoppers Don't Stop </title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+
+	<body>
+		<br>
+		<ul class="nav">
+	  		<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('main.list_category') }}">Inventory Home</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('main.analytics') }}">Analytics</a>
+			</li>
+		</ul>
+		<h3>Edit {{ product_data.product_name }} :-)</h3>
+		<form action="/edit_product/{{ product_data.product_id }}" method="POST">
+			<div class="form-group row">
+		  	<label class="col-sm-2 col-form-label" for="add_product">Product Name:</label><br>
+		  	<input type="text" id="product_name" name="product_name" value="{{ product_data.product_name }}" autofocus><br>
+		  	<br>
+		  	</div>
+		  	<div class="form-group row">
+		  	<label class="col-sm-2 col-form-label" for="add_product">Product Description:</label><br>
+		  	<input type="text" id="product_desc" name="product_desc" value="{{ product_data.product_desc }}"><br>
+		  	<br>
+		  	</div>
+		  	<div class="form-group row">
+		  	<label class="col-sm-2 col-form-label" for="add_product">Unit of Measurement:</label><br>
+		  	<select name="unit_of_measurement" id="unit_of_measurement">
+		  		<option value="none" selected disabled hidden>Select an Option</option>
+		  		<option value="KG">Kilogram</option>
+		  		<option value="G">Grams</option>
+		  		<option value="LTR">Litre</option>
+		  		<option value="BTL">Bottles</option>
+		  		<option value="UN">Unit</option>
+		  		<option value="PC">Piece</option>
+		  	</select>
+		  	<br>
+		  	<br>
+		  	</div>
+		  	<div class="form-group row">
+		  	<label class="col-sm-2 col-form-label" for="add_product">Quantity in Stock/ UOM:</label><br>
+		  	<input type="number" id="product_quantity" name="product_quantity" value="{{ product_data.product_quantity }}"><br>
+		  	<br>
+		  	</div>
+		  	<div class="form-group row">
+		  	<label class="col-sm-2 col-form-label" for="add_product">Product Selling Price/ UOM:</label><br>
+		  	<input type="number" id="sell_price" name="sell_price" value="{{ product_data.sell_price }}"><br>
+		  	<br>
+		  	</div>
+		  	<div class="form-group row">
+		  	<label class="col-sm-2 col-form-label" for="add_product">Product Cost Price/ UOM:</label><br>
+		  	<input type="number" id="cost_price" name="cost_price" value="{{ product_data.cost_price }}"><br>
+		  	<br>
+		  	</div>
+		  	<div class="form-group row">
+		  	<label class="col-sm-2 col-form-label" for="add_product">Discount %:</label><br>
+		  	<input type="number" id="discount" name="discount" value="{{ product_data.discount }}"><br> 	
+		  	<br>
+		  	</div>
+		  	<div class="form-group row">
+		    <label class="col-sm-2 col-form-label" for="add_product">Expiry Date:</label><br>
+		  	<input type="date" id="expiry_date" name="expiry_date" value="{{ product_data.expiry_date }}"><br>
+		  	</div>
+		  	<br>
+		  	<input type="submit" value="Update Product">
+		</form>
+	</body>
+</html>

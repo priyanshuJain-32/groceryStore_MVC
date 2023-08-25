@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title> Shoppers Don't Stop </title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+
+	<body>
+		 
+		<ul class="nav">
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('main.product_page') }}">All Products</a>
+			</li>
+		</ul>
+		<h3> Cart </h3>
+		{% if cart_data %}
+		<table id = "cart-table" class="table">
+		<tr>
+		<th>Product Category</th>
+		<th>Product</th>
+		<th>Quantity</th>
+		<th>Price</th>
+		<th>Total</th>
+		</tr>
+		{% for product in cart_data %}
+		<tr>
+		<td>{{ product.products.category.category_name }}
+		<td>{{ product.products.product_name }}</td>
+		<td>{{ product.cart_product_quantity }}</td>
+		<td>{{ product.products.sell_price }}</td>
+		<td>{{ product.products.sell_price*product.cart_product_quantity }}</td>
+		
+		<td>
+		<form action="/reduce_cart_item/{{ product.cart_product_id }}" method="GET">
+		<input type="submit" style="width: 150px; background-color: orange; color: black;" name="reduce_cart_item" value = "Reduce Item"/>
+		</form>
+		</td>
+		<td>
+		<form action="/delete_cart_item/{{ product.cart_product_id }}" method="GET">
+		<input type="submit" style="width: 150px; background-color: orangered; color: black;" name="delete_cart_item" value = "Delete Item"/>
+		</form>
+		<td>
+		<form action="/buy_cart_item/{{ product.cart_product_id }}" method="GET">
+		<input type="submit" style="width: 150px; background-color: #04AA6D; color: black;" name="buy_cart_item" value = "Buy Item"/>
+		</form>
+		</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		Go to shopping page and add some items
+		{% endif %}
+	</table>
+		<h4 style="margin-left: 180px;">Total Cart Value: {{ total_value }}</h4>
+		<form action="/checkout_cart" method="GET">
+		<input type="submit" name="checkout" value = "Checkout"/>
+		</form>
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

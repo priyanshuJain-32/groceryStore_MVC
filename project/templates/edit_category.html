@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title> Shoppers Don't Stop </title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+
+	<body>
+		<ul class="nav">
+	  		<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('main.list_category') }}">Inventory Home</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('main.analytics') }}">Analytics</a>
+			</li>
+		</ul>
+		<h2> Edit Category Details</h2>
+
+		<form action="/edit_category/{{ category_data.category_id }}" method="POST">
+		<div class="form-group row">
+	  	<label class="col-sm-2 col-form-label" for="category_name">Category Name:</label><br>
+	  	<input type="text" style="color: black" id="category_name" name="category_name" value="{{ category_data.category_name }}">
+	  	
+	  	<br>
+	  	</div>
+		<input type="submit" name="submit" value = "Update Category Name"/>
+		</form>
+		<br>
+		<table id = "product-table" class="table">
+			<th>Product</th>
+			<th>Product Desc</th>
+			<th>Sell Price/ Unit</th>
+			<th>Cost Price/ Unit</th>
+			<th>Discount %</th>
+			<th>Profit/ Unit</th>
+			<th>Product Expiry Date</th>
+			<th>Units in Stock</th>
+
+			<th></th>
+			
+			{% for product in category_data.products %}
+			<tr>
+			<td>{{ product.product_name }}</td>
+			<td>{{ product.product_desc }}</td>
+			<td>{{ product.sell_price }}</td>
+			<td>{{ product.cost_price }}</td>
+			<td>{{ product.discount }}</td>
+			<td>{{ (product.sell_price|int)*(100 - product.discount|int)/100 - (product.cost_price|int) }}</td>
+			<td>{{ product.expiry_date }}</td>
+			<td>{{ product.product_quantity }}</td>
+			<td><form action="/edit_product/{{ product.product_id }}" method="GET">
+				<input type="submit" style="width: 150px; background-color: orange; color: black;" name="edit_product" value = "Edit_product"/></form></td>
+			<td><form action="/delete_product/{{ product.product_id }}" method="GET">
+				<input type="submit" style="width: 170px; background-color: orangered; color: black;" name="delete_product" value = "Delete_product"/></form></td>
+			</tr>
+			{% endfor %}
+		</table>
+		<form action="/add_product/{{ category_data.category_id }}" method="GET">
+		<input type="submit" name="add_product" value = "Add_Product"/>
+		</form>
+		<br>
+		<form action="/delete_category/{{ category_data.category_id }}" method="GET">
+		<input type="submit" style="background-color: red; color: black;" name="delete_category" value = "Delete_Category"/>
+		</form>
+		
+	</body>
+</html>

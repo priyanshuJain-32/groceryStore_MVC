@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title> Shoppers Don't Stop </title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+
+	<body>
+		 
+		<ul class="nav">
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" href="{{ url_for('main.view_cart') }}">Cart</a>
+			</li>
+
+		</ul>
+		<h2>Check out our range of products.</h2>
+		{% for category in category_data %}
+		{% if category.products %}
+	  	<br>
+	  	<div style="margin-left: 10px; background-color: lightgrey; background-size: 100px 100px;">{{ category.category_name }}</div>
+		<table id = "product-table" class="table" style="width: 95%; text-align: center;">
+			<th>Product</th>
+			<th>Product Desc</th>
+			<th>Price/ Unit</th>
+			<th>Available Quantity</th>
+			<th>Discount %</th>
+			<th>Offer Price</th>
+			<th>Product Expiry Date</th>
+			<th></th>
+			<th></th>
+			
+			{% for product in category.products %}
+			<tr>
+			<td>{{ product.product_name }}</td>
+			<td>{{ product.product_desc }}</td>
+			<td>{{ product.sell_price }}</td>
+			<td>{{ product.product_quantity }}</td>
+			<td>{{ product.discount }}</td>
+			<td>{{ (product.sell_price|int)*(100-product.discount)/100 }}</td>
+			<td>{{ product.expiry_date }}</td>
+			{% if product.product_quantity!=0 %}
+			<td><form action="/order_product/{{ product.product_id }}" method="GET">
+				<input type="submit" style="width: 120px;" name="order_product" value = "Buy Now"/></form></td>
+			<td><form action="/cart_product/{{ product.product_id }}" method="POST">
+				<input type="submit" style="width: 150px;" name="cart_product" value = "Add to Cart"/></form></td>
+			</tr>
+			{% else %}
+			<td>Out of Stock</td>
+			{% endif %}
+			{% endfor %}
+		{% endif %}
+		</table>
+		{% endfor %}
+	</body>
+</html>

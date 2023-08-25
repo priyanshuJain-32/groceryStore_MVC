@@ -1,0 +1,282 @@
+openapi: 3.0.0
+info:
+  title: Mad1_Project_API's
+  description: >-
+    The following collection allows interaction with the database for Shoppers
+    don't stop webapp. The requests are made to the localhost server and the
+    API's have been configured. Please have fun. Make sure to checkout the
+    description for each section.
+
+
+    The backend is configured to accept request data from forms using
+    request.form. So make sure to make the calls using form data and not raw
+    json.
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:5000
+paths:
+  /api/category:
+    get:
+      tags:
+        - default
+      summary: GET_All_Category
+      description: |-
+        GET call for all categories listed in the database.
+
+        Returns json with list of categories with:
+
+        - category_id
+        - category_name
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - default
+      summary: POST_Category
+      description: >-
+        Post request used to add new category to the database. Use the format
+        given in body below.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category_name:
+                  type: string
+                  description: Enter name for new category
+                  example: Men Clothing
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/category/5:
+    get:
+      tags:
+        - default
+      summary: GET_Category
+      description: |-
+        GET call for a particular category.
+
+        Category number to be specified in URL.
+
+        Returns:
+
+        - category_id,
+        - category_name,
+        - For the category returns a list of:
+            - product_id
+            - product_name
+            - product_desc
+            - sell_price
+            - cost_price
+            - discount
+            - product_quantity
+            - unit_of_measurement
+            - expiry_date
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - default
+      summary: PUT_Category
+      description: >-
+        Used to update the Category name. Make sure to check the category id
+        first by making a get call for all the categories.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category_name:
+                  type: string
+                  description: Enter new name for the category
+                  example: Cellular
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/category/6:
+    delete:
+      tags:
+        - default
+      summary: DELETE_Category
+      description: >-
+        Used to Delete a category and the products under that category. This
+        also deletes these products from User's carts.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/product:
+    get:
+      tags:
+        - default
+      summary: GET_All_Product
+      description: Gives list of all the products in the database.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - default
+      summary: POST_Product
+      description: >-
+        Used to add new product into the database. Make sure to use the right
+        category id. In case of doubt just get all the categories by making a
+        GET call.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                product_name:
+                  type: string
+                  description: Enter product name
+                  example: Samsung Guru
+                product_desc:
+                  type: string
+                  description: Enter short product description
+                  example: Radio is all you need
+                sell_price:
+                  type: integer
+                  description: Price in INR
+                  example: '2500'
+                cost_price:
+                  type: integer
+                  description: Price in INR
+                  example: '2200'
+                discount:
+                  type: integer
+                  description: Discount in percentage e.g. 10% enter as 10
+                  example: '10'
+                unit_of_measurement:
+                  type: string
+                  description: |-
+                    Enter left symbols here:
+                    KG - Kilogram
+                    G - Grams
+                    LTR - Litre
+                    BTL - Bottles
+                    UN - Unit
+                    PC - Piece
+                  example: PC
+                product_quantity:
+                  type: integer
+                  description: Quantity to be added into database
+                  example: '100'
+                expiry_date:
+                  type: string
+                  description: Use YYYY-MM-DD format
+                  example: '2025-10-23'
+                product_category_id:
+                  type: integer
+                  description: Enter category in which product is to be added
+                  example: '5'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/product/4:
+    get:
+      tags:
+        - default
+      summary: GET_Product
+      description: Allows to make a GET call for a particular product.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/product/11:
+    put:
+      tags:
+        - default
+      summary: PUT_Product
+      description: >-
+        Put request used to update the product details. Please refer the body
+        format mention below to make the request. Check for the category using
+        GET all Category call and then check the product id under the category
+        using another GET call on Category. Then select the right product id
+        before sending the PUT request. Mention the category id and product id
+        properly.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                product_name:
+                  type: string
+                  description: Enter product name
+                  example: Samsung Z Fold
+                product_desc:
+                  type: string
+                  description: Enter short product description
+                  example: World's first foldable phone
+                sell_price:
+                  type: integer
+                  description: Price in INR
+                  example: '100000'
+                cost_price:
+                  type: integer
+                  description: Price in INR
+                  example: '90000'
+                discount:
+                  type: integer
+                  description: Discount in percentage e.g. 10% enter as 10
+                  example: '5'
+                unit_of_measurement:
+                  type: string
+                  description: |-
+                    Enter left symbols here:
+                    KG - Kilogram
+                    G - Grams
+                    LTR - Litre
+                    BTL - Bottles
+                    UN - Unit
+                    PC - Piece
+                  example: UN
+                product_quantity:
+                  type: integer
+                  description: Quantity to be added into database
+                  example: '100'
+                expiry_date:
+                  type: string
+                  description: Use YYYY-MM-DD format
+                  example: '2023-10-23'
+                product_category_id:
+                  type: integer
+                  description: Enter category in which product is to be added
+                  example: '5'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - default
+      summary: DELETE_Product
+      description: >-
+        Delete request used to delete a product and all the product data
+        associated with that particular product id from the products table.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
