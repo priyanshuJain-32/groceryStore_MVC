@@ -57,4 +57,6 @@ also be bought together by adding to cart and pressing the checkout button.
 5. Admin can add and delete categories, products from the inventory.
 6. Admin can use API’s to perform CRUD operations on categories and products.
 
+## How to run
+[Use Readme.txt inside /project](project/README.txt)
 
