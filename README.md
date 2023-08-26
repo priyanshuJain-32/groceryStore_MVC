@@ -34,7 +34,7 @@ test these API’s.
 https://www.postman.com/flight-explorer-79219161/workspace/my-workspace/collection/28984634-0b36f
 844-ee38-4cf3-afb6-27e563a4cb4e?action=share&creator=28984634
 
-## Architecture and Features
+## Folder Structure
 The application structure is as follows:
 Root folder
   1. Project
@@ -48,7 +48,7 @@ Root folder
     h. resources.py - for API
   2. Project pdf
      
-### Application has multiple features:
+## Features:
 1. Supports new user signup
 2. Separate login page for Admin and User
 3. Users can browse the products from different categories and add products to cart.
