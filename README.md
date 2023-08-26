@@ -22,7 +22,8 @@ Database has been designed into 6 tables. For diagrams please refer to page 2.
 redundancy due to multiple-products in one category.
 2. Users and addresses store user information.
 3. Orders and carts are used to manage order history and maintain user carts
-![DB Schema Design](/static/DB_schema.)
+
+![DB Schema Design](project/static/DB_schema.png)
 
 ## API Design
 Created api for CRUD operations on Category and Products. The API’s allow easy addition of categories
